@@ -136,15 +136,6 @@ This project helped me understand the basic Docker workflow:
 
 I focused on understanding how Docker is used to **build, run, connect, and manage containerized applications**.
 
-## 🚀 Next Steps
-
-* CI/CD
-* Jenkins / GitHub Actions
-* AWS
-* Kubernetes
-* Container Security
-* Real-world DevOps Projects
-
 ### 🧰 Technologies
 
-**Docker | Dockerfile | Docker Compose | Linux | Nginx | MySQL | Containerization**
+**Docker | Dockerfile | Docker Compose | Linux | Nginx  | Containerization**
