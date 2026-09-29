@@ -1,0 +1,36 @@
+# Docker Networking
+
+## List Networks
+
+docker network ls
+
+## Port Mapping
+
+docker run -d \
+  --name nginx01 \
+  -p 8080:80 \
+  nginx
+
+Access:
+
+http://localhost:8080
+
+## Host Network
+
+docker run -d \
+  --name nginx-host \
+  --network host \
+  nginx
+
+## None Network
+
+docker run -d \
+  --name nginx-none \
+  --network none \
+  nginx
+
+
+Bridge  → Default Docker networking
+Host    → Uses host network namespace
+None    → No external network connectivity
+-p      → Publishes container port to host

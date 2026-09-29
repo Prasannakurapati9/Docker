@@ -1,0 +1,27 @@
+# Docker Volumes
+
+## Create Volume
+
+docker volume create testvol1
+
+## List Volumes
+
+docker volume ls
+
+## Inspect Volume
+
+docker volume inspect testvol1
+
+## Mount Volume
+
+docker run -it \
+  --name srv01 \
+  --mount source=testvol1,destination=/data \
+  centos
+
+## Bind Mount
+
+docker run -it \
+  --name srv02 \
+  -v "$(pwd)":/data \
+  centos
