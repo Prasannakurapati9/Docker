@@ -1,242 +1,150 @@
-
 # 🐳 Docker Hands-On Lab
 
-A hands-on project focused on understanding **Docker fundamentals, containerization, networking, persistent storage, Dockerfile, and Docker Compose**.
+A hands-on project covering **Docker fundamentals, containerization, networking, storage, Dockerfile, and Docker Compose** as part of my DevOps learning journey.
 
-This repository documents the Docker concepts, commands, configurations, and practical exercises completed as part of my **DevOps learning journey**.
+## 📌 Topics Covered
 
----
-
-## 📌 Project Overview
-
-Docker is a containerization platform that packages an application and its dependencies into a portable container.
-
-In this lab, I practiced the complete basic Docker workflow:
-
-```text
-Docker Image
-     ↓
-Create / Run Container
-     ↓
-Configure Networking
-     ↓
-Attach Persistent Storage
-     ↓
-Build Custom Image with Dockerfile
-     ↓
-Manage Multiple Services with Docker Compose
-```
-
----
-
-## 🎯 Objectives
-
-The main objectives of this project were to gain practical experience with:
-
-* Docker images
-* Docker containers
-* Container lifecycle management
+* Docker Images
+* Docker Containers
 * Docker Hub
-* Docker networking
-* Port mapping
-* Docker volumes
-* Bind mounts
+* Container Lifecycle Management
+* Docker Networking
+* Port Mapping
+* Docker Volumes
+* Bind Mounts
 * Dockerfile
-* Custom Docker images
+* Custom Docker Images
 * Docker Compose
-* Multi-container applications
+* Multi-container Applications
 
----
-
-# 🐳 1. Docker Fundamentals
-
-### Check Docker Version
+## 🐳 Docker Basics
 
 ```bash
 docker --version
-```
-
-### Login to Docker Hub
-
-```bash
 docker login
-```
-
-### Search for an Image
-
-```bash
 docker search nginx
-```
-
-### Pull an Image
-
-```bash
 docker pull nginx
-```
 
-### List Images
-
-```bash
 docker images
-```
-
-or
-
-```bash
-docker image ls
-```
-
-### Inspect an Image
-
-```bash
 docker inspect nginx
-```
-
-### View Image History
-
-```bash
 docker history nginx
 ```
 
-### Remove an Image
+## 📦 Container Management
 
 ```bash
+docker create --name nginx01 nginx
+docker run -d --name nginx02 nginx
+
+docker ps
+docker ps -a
+
+docker start nginx01
+docker stop nginx01
+docker exec -it nginx02 /bin/bash
+
+docker rm nginx02
 docker rmi nginx
 ```
 
----
-
-# 📦 2. Docker Containers
-
-A **container** is a running or stopped instance of a Docker image.
-
-### Create a Container
-
-```bash
-docker create --name nginx_srv01 nginx
-```
-
-`docker create` creates the container but does not start it.
-
-### Start a Container
-
-```bash
-docker start nginx_srv01
-```
-
-### Stop a Container
-
-```bash
-docker stop nginx_srv01
-```
-
-### List Running Containers
-
-```bash
-docker ps
-```
-
-### List All Containers
-
-```bash
-docker ps -a
-```
-
-### Run a Container
-
-```bash
-docker run --name nginx_srv02 nginx
-```
-
-`docker run` creates and starts a container.
-
-### Run in Detached Mode
-
-```bash
-docker run -d --name nginx_srv03 nginx
-```
-
-The `-d` option runs the container in the background.
-
-### Access a Running Container
-
-```bash
-docker exec -it nginx_srv03 /bin/bash
-```
-
-### Exit the Container
-
-```bash
-exit
-```
-
-### Force Stop a Container
-
-```bash
-docker kill nginx_srv03
-```
-
-### Remove a Container
-
-```bash
-docker rm nginx_srv03
-```
-
----
-
-# 🌐 3. Docker Networking
-
-Docker networking allows containers to communicate with other containers and external systems.
-
-### List Docker Networks
+## 🌐 Networking
 
 ```bash
 docker network ls
+
+docker run -d --name web -p 8080:80 nginx
+
+docker run -d --name web-host --network host nginx
+docker run -d --name web-none --network none nginx
 ```
 
-## Bridge Network
+Practiced **bridge networking, host networking, none networking, and port mapping**.
 
-The bridge network is the standard networking mode for containers.
+## 💾 Volumes & Storage
+
+```bash
+docker volume create appdata
+docker volume ls
+docker volume inspect appdata
+
+docker run -it \
+  --mount source=appdata,destination=/data \
+  centos
+```
+
+Also practiced:
+
+* Docker volumes
+* Bind mounts
+* Persistent data
+* Sharing volumes between containers
+
+## 🛠️ Dockerfile
+
+Created custom Docker images using common Dockerfile instructions:
+
+```dockerfile
+FROM
+WORKDIR
+COPY
+RUN
+EXPOSE
+CMD
+```
 
 Example:
 
 ```bash
-docker run -d \
-  --name nginx_srv04 \
-  -p 8080:80 \
-  nginx
+docker build -t myapp:v1 .
+docker run -d --name myapp myapp:v1
 ```
 
-Here:
+## ⚙️ Docker Compose
 
-```text
-Docker Host Port 8080
-        ↓
-Container Port 80
-        ↓
-      Nginx
+Used Docker Compose to define and manage **multi-container applications**.
+
+```yaml
+services:
+  web:
+    image: nginx
+    ports:
+      - "8080:80"
+
+  app:
+    build: .
+
+  db:
+    image: mysql
 ```
 
-The `-p 8080:80` option publishes container port `80` on host port `8080`.
-
-## Host Network
+Common commands practiced:
 
 ```bash
-docker run -d \
-  --name nginx_host \
-  --network host \
-  nginx
+docker compose up -d
+docker compose ps
+docker compose logs
+docker compose stop
+docker compose start
+docker compose down
 ```
 
-The container uses the host's network namespace.
+## 🎯 Key Learning
 
-## None Network
+This project helped me understand the basic Docker workflow:
 
-```bash
-docker run -d \
-  --name nginx_none \
-  --network none \
-  nginx
-```
+**Image → Container → Network → Storage → Dockerfile → Docker Compose**
 
-This isolates the container from external network
+I focused on understanding how Docker is used to **build, run, connect, and manage containerized applications**.
+
+## 🚀 Next Steps
+
+* CI/CD
+* Jenkins / GitHub Actions
+* AWS
+* Kubernetes
+* Container Security
+* Real-world DevOps Projects
+
+### 🧰 Technologies
+
+**Docker | Dockerfile | Docker Compose | Linux | Nginx | MySQL | Containerization**
