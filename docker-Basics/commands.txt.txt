@@ -1,0 +1,62 @@
+# Docker Basics
+
+## Docker Version
+
+docker --version
+
+## Docker Hub
+
+docker login
+
+## Search Image
+
+docker search nginx
+
+## Pull Image
+
+docker pull nginx
+
+## List Images
+
+docker images
+
+## Inspect Image
+
+docker inspect nginx
+
+## Image History
+
+docker history nginx
+
+## Create Container
+
+docker create --name nginx01 nginx
+
+## Run Container
+
+docker run -d --name nginx02 nginx
+
+## Running Containers
+
+docker ps
+
+## All Containers
+
+docker ps -a
+
+## Start / Stop
+
+docker start nginx01
+docker stop nginx01
+
+## Access Container
+
+docker exec -it nginx02 /bin/bash
+
+## Remove Container
+
+docker rm nginx02
+
+## Remove Image
+
+docker rmi nginx
